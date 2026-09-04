@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GPS Dashboard</title>
+</head>
+<body>
+
+<h1>GPS Dashboard</h1>
+
+<button id="captureBtn">Capture Point</button>
+
+<div id="results"></div>
+
+<script>
+document.getElementById("captureBtn").onclick = function() {
+
+    navigator.geolocation.getCurrentPosition(
+        function(pos) {
+
+            document.getElementById("results").innerHTML = `
+                <p>Latitude: ${pos.coords.latitude}</p>
+                <p>Longitude: ${pos.coords.longitude}</p>
+                <p>Elevation: ${pos.coords.altitude}</p>
+                <p>Horizontal Accuracy: ${pos.coords.accuracy} m</p>
+                <p>Vertical Accuracy: ${pos.coords.altitudeAccuracy} m</p>
+            `;
+        },
+        function(err) {
+            alert(err.message);
+        },
+        {
+            enableHighAccuracy: true
+        }
+    );
+};
+</script>
+
+</body>
+</html>
